@@ -1,35 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
-class LottoNumbers{
-    
-    private $arrayNumbers = [];
-    
-    public function __construct($from, $to) {
-        
-        for($i=$from*1;$i<=$to*1;$i++){
-            $this->arrayNumbers[] = $i;
-        } 
-        
-    }
-    
-    public function shuffleArray()
-    {        
-        shuffle($this->arrayNumbers);
-        
-    
-    }
-    
-    public function getNumber()
+use InvalidArgumentException;
+use UnderflowException;
+
+final class LottoNumbers
+{
+    /** @var int[] */
+    private $numbers;
+
+    public function __construct(int $from, int $to)
     {
-        $position = rand(0, count($this->arrayNumbers)-1);
-        $ret = $this->arrayNumbers[$position];
-        unset($this->arrayNumbers[$position]);
-        $this->shuffleArray();
+        if ($from > $to) {
+            throw new InvalidArgumentException('The lower bound must be <= the upper bound.');
+        }
+
+        $this->numbers = range($from, $to);
+    }
+
+    public function shuffleArray(): void
+    {
+        shuffle($this->numbers);
+    }
+
+    public function getNumber(): int
+    {
+        if ($this->numbers === []) {
+            throw new UnderflowException('No numbers left to draw.');
+        }
+
+        $position = random_int(0, count($this->numbers) - 1);
+        $ret = $this->numbers[$position];
+        array_splice($this->numbers, $position, 1);
+
         return $ret;
     }
-    
-    
 }
 
