@@ -1,64 +1,42 @@
 # Lotto Numbers
 
 ## Overview
-This repository explores basic statistical analysis of lottery draw data.
+Small Symfony 4.3 project demonstrating a CLI command and a front-end lottery machine UI. Built as a clean, testable sample project for recruitment and job applications.
 
-It was created as a lightweight experiment to better understand:
-- randomness
-- probability distribution
-- frequency analysis
-- limitations of pattern detection in stochastic systems
-
-This project does **not** attempt to predict lottery outcomes.
-
----
-
-## Context
-Lottery numbers represent a well-known example of a truly random process that is often misunderstood.
-
-This repository treats lottery data as a convenient and familiar dataset for:
-- experimenting with data processing
-- validating statistical assumptions
-- demonstrating why pattern-based prediction fails in random systems
-
----
-
-## Scope
-The focus of this project is limited to:
-- historical draw analysis
-- frequency distribution
-- basic statistical observations
-- visualisation of results (where applicable)
-
-No claims are made regarding predictive accuracy.
-
----
-
-## Key Takeaways
-- Random systems naturally produce apparent patterns
-- Frequency bias does not imply predictability
-- Data analysis must be interpreted within correct probabilistic boundaries
-
----
+## What It Shows
+- Symfony Console command with input validation and predictable exit codes
+- Front-end interactive page with animated lotto machine and dynamic draw count
+- PHPUnit tests validating output format, uniqueness, and timing behavior
+- Clear, minimal codebase focused on readability
 
 ## Tech Stack
-- Language-specific scripting (depending on implementation)
-- Basic statistical tooling
-- Simple data parsing and processing
+- PHP 7.1+
+- Symfony 4.3 (Console, FrameworkBundle)
+- PHPUnit
+- Vanilla HTML/CSS/JS (no build step)
 
----
+## Quick Start
+```bash
+composer install
+php -S 127.0.0.1:8000 -t public
+```
+Open `http://127.0.0.1:8000/` to see the UI.
 
-## Status
-- Experimental
-- Educational
-- Not intended for production or prediction use
+## CLI Usage
+```bash
+php bin/console lotto:numbers --loNum=1 --hiNum=59 --initShuffle=0 --shuffle=0
+```
 
----
+## Tests
+```bash
+vendor/bin/phpunit
+```
 
-## Why This Project Exists
-This repository demonstrates:
-- practical data analysis on real datasets
-- understanding of randomness and statistical limits
-- responsible interpretation of analytical results
+## Structure
+- `src/Command/LottoCommand.php` CLI command
+- `src/Controller/LottoPageController.php` UI page
+- `src/LottoNumbers.php` number generator
+- `tests/app/Command/ListCommandTest.php` tests
 
-It is intentionally simple and honest in scope.
+## Notes for Recruiters
+I keep this repository intentionally small to highlight code clarity, modern PHP practices, and test coverage. If you want a more complex sample (API, database, CI pipeline, or Docker setup), I can provide it.
